@@ -1,0 +1,288 @@
+###############################################################################
+#
+# IAR ELF Linker V8.40.1.212/W32 for ARM                  13/Sep/2019  17:32:08
+# Copyright 2007-2019 IAR Systems AB.
+#
+#    Output file  =
+#        C:\Users\F8075805\Desktop\EK-TM4C1294_IAR8\Projects\simple_display\Debug\Exe\simple_display.out
+#    Map file     =
+#        C:\Users\F8075805\Desktop\EK-TM4C1294_IAR8\Projects\simple_display\Debug\List\simple_display.map
+#    Command line =
+#        -f C:\Users\F8075805\AppData\Local\Temp\EW68C7.tmp
+#        (C:\Users\F8075805\Desktop\EK-TM4C1294_IAR8\Projects\simple_display\Debug\Obj\cfaf128x128x16.o
+#        C:\Users\F8075805\Desktop\EK-TM4C1294_IAR8\TivaWare_C_Series-2.1.4.178\driverlib\ewarm\Exe\driverlib.a
+#        C:\Users\F8075805\Desktop\EK-TM4C1294_IAR8\TivaWare_C_Series-2.1.4.178\grlib\ewarm\Exe\grlib.a
+#        C:\Users\F8075805\Desktop\EK-TM4C1294_IAR8\Projects\simple_display\Debug\Obj\simple_display.o
+#        C:\Users\F8075805\Desktop\EK-TM4C1294_IAR8\Projects\simple_display\Debug\Obj\startup_TM4C1294.o
+#        C:\Users\F8075805\Desktop\EK-TM4C1294_IAR8\Projects\simple_display\Debug\Obj\system_TM4C1294_TW.o
+#        C:\Users\F8075805\Desktop\EK-TM4C1294_IAR8\Projects\simple_display\Debug\Obj\uartstdio.o
+#        --no_out_extension -o
+#        C:\Users\F8075805\Desktop\EK-TM4C1294_IAR8\Projects\simple_display\Debug\Exe\simple_display.out
+#        --map
+#        C:\Users\F8075805\Desktop\EK-TM4C1294_IAR8\Projects\simple_display\Debug\List\simple_display.map
+#        --config "C:\Program Files\IAR Systems\Embedded Workbench
+#        8.3\arm\config\linker\TexasInstruments\TM4C1294NC.icf" --semihosting
+#        --entry __iar_program_start --vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The basic heap was selected because some modules are built with
+size limitations (and not runtime checking), and --advanced_heap
+was not specified.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at address 0x0 { ro section .intvec };
+"P1":  place in [from 0x0 to 0xf'ffff] { ro };
+define block CSTACK with size = 32K, alignment = 8 { };
+define block HEAP with size = 64K, alignment = 8 { };
+"P2":  place in [from 0x2000'0000 to 0x2003'ffff] {
+          rw, block CSTACK, block HEAP };
+initialize by copy { rw };
+
+  Section            Kind         Address    Size  Object
+  -------            ----         -------    ----  ------
+"A0":                                       0x3c0
+  .intvec            ro code          0x0   0x3c0  startup_TM4C1294.o [1]
+                                  - 0x3c0   0x3c0
+
+"P1":                                       0xea1
+  .text              ro code        0x3c0   0x2b8  simple_display.o [1]
+  .text              ro code        0x678   0x2ac  sysctl.o [3]
+  .text              ro code        0x924   0x1e8  gpio.o [3]
+  .text              ro code        0xb0c    0xb8  uart.o [3]
+  .text              ro code        0xbc4   0x252  uartstdio.o [1]
+  .text              ro code        0xe16     0x2  startup_TM4C1294.o [1]
+  .text              ro code        0xe18    0x2c  system_TM4C1294_TW.o [1]
+  .text              ro code        0xe44    0x1c  systick.o [3]
+  .rodata            const          0xe60   0x1b0  sysctl.o [3]
+  .rodata            const         0x1010    0x90  gpio.o [3]
+  .rodata            const         0x10a0    0x6c  sysctl.o [3]
+  .text              ro code       0x110c    0x38  packbits_init_single.o [4]
+  .rodata            const         0x1144    0x30  sysctl.o [3]
+  .text              ro code       0x1174    0x28  data_init.o [4]
+  .iar.init_table    const         0x119c    0x10  - Linker created -
+  .text              ro code       0x11ac    0x1e  cmain.o [4]
+  .text              ro code       0x11ca     0x4  low_level_init.o [2]
+  .text              ro code       0x11ce     0x4  exit.o [2]
+  .text              ro code       0x11d4     0xa  cexit.o [4]
+  .text              ro code       0x11e0    0x14  exit.o [5]
+  .rodata            const         0x11f4    0x14  uartstdio.o [1]
+  .text              ro code       0x1208    0x14  startup_TM4C1294.o [1]
+  .rodata            const         0x121c     0xc  uartstdio.o [1]
+  .rodata            const         0x1228     0xc  uartstdio.o [1]
+  .text              ro code       0x1234     0xc  cstartup_M.o [4]
+  .rodata            const         0x1240     0x8  simple_display.o [1]
+  .rodata            const         0x1248     0x8  simple_display.o [1]
+  .rodata            const         0x1250     0x8  uartstdio.o [1]
+  .rodata            const         0x1258     0x4  uartstdio.o [1]
+  .rodata            const         0x125c     0x0  packbits_init_single.o [4]
+  Initializer bytes  const         0x125c     0x5  <for P2-1>
+                                 - 0x1261   0xea1
+
+"P2", part 1 of 2:                           0x3a
+  P2-1                        0x2000'0000    0x3a  <Init block>
+    .data            inited   0x2000'0000     0x4  simple_display.o [1]
+    .bss             inited   0x2000'0004     0x4  simple_display.o [1]
+    .bss             inited   0x2000'0008     0x4  simple_display.o [1]
+    .bss             inited   0x2000'000c    0x24  simple_display.o [1]
+    .bss             inited   0x2000'0030     0x4  simple_display.o [1]
+    .bss             inited   0x2000'0034     0x4  uartstdio.o [1]
+    .bss             inited   0x2000'0038     0x1  simple_display.o [1]
+    .bss             inited   0x2000'0039     0x1  simple_display.o [1]
+                            - 0x2000'003a    0x3a
+
+"P2", part 2 of 2:                         0x8004
+  .noinit            uninit   0x2000'003c     0x4  system_TM4C1294_TW.o [1]
+  CSTACK                      0x2000'0040  0x8000  <Block>
+    CSTACK           uninit   0x2000'0040  0x8000  <Block tail>
+                            - 0x2000'8040  0x8004
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+       0x1261     0xf'ffff  0xf'ed9f
+  0x2000'003a  0x2000'003b       0x2
+  0x2000'8040  0x2003'ffff  0x3'7fc0
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address      Size
+          -------      ----
+Copy/packbits (__iar_packbits_init_single3)
+    1 source range, total size 0x5 (8% of destination):
+               0x125c   0x5
+    1 destination range, total size 0x3a:
+          0x2000'0000  0x3a
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                  ro code  ro data  rw data
+    ------                  -------  -------  -------
+command line/config:
+    -------------------------------------------------
+    Total:
+
+C:\Users\F8075805\Desktop\EK-TM4C1294_IAR8\Projects\simple_display\Debug\Obj: [1]
+    simple_display.o            696       21       54
+    startup_TM4C1294.o          982
+    system_TM4C1294_TW.o         44                 4
+    uartstdio.o                 594       56        4
+    -------------------------------------------------
+    Total:                    2'316       77       62
+
+dl7M_tln.a: [2]
+    exit.o                        4
+    low_level_init.o              4
+    -------------------------------------------------
+    Total:                        8
+
+driverlib.a: [3]
+    gpio.o                      488      144
+    sysctl.o                    684      588
+    systick.o                    28
+    uart.o                      184
+    -------------------------------------------------
+    Total:                    1'384      732
+
+rt7M_tl.a: [4]
+    cexit.o                      10
+    cmain.o                      30
+    cstartup_M.o                 12
+    data_init.o                  40
+    packbits_init_single.o       56
+    -------------------------------------------------
+    Total:                      148
+
+shb_l.a: [5]
+    exit.o                       20
+    -------------------------------------------------
+    Total:                       20
+
+    Gaps                          4
+    Linker created                        16   32'768
+-----------------------------------------------------
+    Grand Total:              3'880      825   32'830
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address   Size  Type      Object
+-----                       -------   ----  ----      ------
+.iar.init_table$$Base        0x119c          --   Gb  - Linker created -
+.iar.init_table$$Limit       0x11ac          --   Gb  - Linker created -
+?main                        0x11ad         Code  Gb  cmain.o [4]
+CSTACK$$Base            0x2000'0040          --   Gb  - Linker created -
+CSTACK$$Limit           0x2000'8040          --   Gb  - Linker created -
+ConfigureUART                 0x40f   0x3c  Code  Gb  simple_display.o [1]
+GPIODirModeSet                0x925   0x28  Code  Gb  gpio.o [3]
+GPIOPadConfigSet              0x94d  0x102  Code  Gb  gpio.o [3]
+GPIOPinConfigure              0xacb   0x36  Code  Gb  gpio.o [3]
+GPIOPinRead                   0xa4f    0x8  Code  Gb  gpio.o [3]
+GPIOPinTypeGPIOInput          0xa63   0x14  Code  Gb  gpio.o [3]
+GPIOPinTypeGPIOOutput         0xa77    0xa  Code  Gb  gpio.o [3]
+GPIOPinTypeTimer              0xa9b   0x14  Code  Gb  gpio.o [3]
+GPIOPinTypeUART               0xaaf   0x14  Code  Gb  gpio.o [3]
+GPIOPinWrite                  0xa57    0x8  Code  Gb  gpio.o [3]
+InicializaTimerModeContador
+                              0x3c1   0x4e  Code  Gb  simple_display.o [1]
+InicializacaoPortF            0x44b   0x36  Code  Gb  simple_display.o [1]
+InicializacaoPortJ            0x4db   0x2c  Code  Gb  simple_display.o [1]
+InicializacaoPortL            0x481   0x24  Code  Gb  simple_display.o [1]
+InicializacaoPortN            0x4a5   0x36  Code  Gb  simple_display.o [1]
+MAXIMO                  0x2000'0000    0x4  Data  Gb  simple_display.o [1]
+Period                  0x2000'0039    0x1  Data  Gb  simple_display.o [1]
+Region$$Table$$Base          0x119c          --   Gb  - Linker created -
+Region$$Table$$Limit         0x11ac          --   Gb  - Linker created -
+SysCtlClockFreqSet            0x6e3  0x1fc  Code  Gb  sysctl.o [3]
+SysCtlPeripheralEnable        0x6c5    0x8  Code  Gb  sysctl.o [3]
+SysCtlPeripheralPresent
+                              0x699    0xa  Code  Gb  sysctl.o [3]
+SysCtlPeripheralReady         0x6a3    0x8  Code  Gb  sysctl.o [3]
+SysTickIntEnable              0xe45    0xc  Code  Gb  systick.o [3]
+SysTickPeriodSet              0xe51    0x8  Code  Gb  systick.o [3]
+SystemCoreClock         0x2000'003c    0x4  Data  Gb  system_TM4C1294_TW.o [1]
+SystemInit                    0xe19   0x1a  Code  Gb  system_TM4C1294_TW.o [1]
+TIME                    0x2000'0004    0x4  Data  Gb  simple_display.o [1]
+UARTCharPut                   0xbad   0x10  Code  Gb  uart.o [3]
+UARTClockSourceSet            0xbbd    0x8  Code  Gb  uart.o [3]
+UARTConfigSetExpClk           0xb0d   0x5c  Code  Gb  uart.o [3]
+UARTDisable                   0xb83   0x22  Code  Gb  uart.o [3]
+UARTEnable                    0xb69   0x1a  Code  Gb  uart.o [3]
+UARTStdioConfig               0xbc5   0x48  Code  Gb  uartstdio.o [1]
+UARTprintf                    0xe09    0xe  Code  Gb  uartstdio.o [1]
+UARTvprintf                   0xc3b  0x1b6  Code  Gb  uartstdio.o [1]
+UARTwrite                     0xc0d   0x2e  Code  Gb  uartstdio.o [1]
+_SysCtlMemTimingGet           0x679   0x20  Code  Lc  sysctl.o [3]
+__Vectors                       0x0          --   Gb  startup_TM4C1294.o [1]
+__Vectors_End                 0x3c0         Data  Gb  startup_TM4C1294.o [1]
+__Vectors_Size {Abs}          0x3c0          --   Gb  startup_TM4C1294.o [1]
+__cmain                      0x11ad         Code  Gb  cmain.o [4]
+__exit                       0x11e1   0x14  Code  Gb  exit.o [5]
+__iar_data_init3             0x1175   0x28  Code  Gb  data_init.o [4]
+__iar_init_vfp               0x1211         Code  Wk  startup_TM4C1294.o [1]
+__iar_packbits_init_single3
+                             0x110d   0x38  Code  Gb  packbits_init_single.o [4]
+__iar_program_start          0x1235         Code  Gb  cstartup_M.o [4]
+__low_level_init             0x11cb    0x4  Code  Gb  low_level_init.o [2]
+__vector_table                  0x0         Data  Gb  startup_TM4C1294.o [1]
+__vector_table_0x1c            0x1c         Data  Gb  startup_TM4C1294.o [1]
+_call_main                   0x11b9         Code  Gb  cmain.o [4]
+_exit                        0x11d5         Code  Gb  cexit.o [4]
+_main                        0x11c7         Code  Gb  cmain.o [4]
+demo                          0x507   0x4e  Code  Gb  simple_display.o [1]
+evento                  0x2000'0030    0x4  Data  Gb  simple_display.o [1]
+exit                         0x11cf    0x4  Code  Gb  exit.o [2]
+g_pcHex                      0x1258    0x4  Data  Lc  uartstdio.o [1]
+g_pppui32XTALtoVCO            0xe60  0x1b0  Data  Lc  sysctl.o [3]
+g_pui32GPIOBaseAddrs         0x1010   0x90  Data  Lc  gpio.o [3]
+g_pui32VCOFrequencies         0x91c    0x8  Data  Lc  sysctl.o [3]
+g_pui32Xtals                 0x10a0   0x6c  Data  Lc  sysctl.o [3]
+g_sXTALtoMEMTIM              0x1144   0x30  Data  Lc  sysctl.o [3]
+g_ui32Base              0x2000'0034    0x4  Data  Lc  uartstdio.o [1]
+g_ui32UARTBase               0x121c    0xc  Data  Lc  uartstdio.o [1]
+g_ui32UARTPeriph             0x1228    0xc  Data  Lc  uartstdio.o [1]
+i                       0x2000'0038    0x1  Data  Gb  simple_display.o [1]
+larg_pulso              0x2000'0008    0x4  Data  Gb  simple_display.o [1]
+main                          0x555   0x98  Code  Gb  simple_display.o [1]
+vet_larg_pulso          0x2000'000c   0x24  Data  Gb  simple_display.o [1]
+
+
+[1] = C:\Users\F8075805\Desktop\EK-TM4C1294_IAR8\Projects\simple_display\Debug\Obj
+[2] = dl7M_tln.a
+[3] = driverlib.a
+[4] = rt7M_tl.a
+[5] = shb_l.a
+
+   3'880 bytes of readonly  code memory
+     825 bytes of readonly  data memory
+  32'830 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

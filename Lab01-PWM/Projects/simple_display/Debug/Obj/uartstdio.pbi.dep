@@ -1,0 +1,21 @@
+uartstdio.pbi: \
+  F:\EK-TM4C1294_IAR8\TivaWare_C_Series-2.1.4.178\utils\uartstdio.c \
+  D:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stdbool.h \
+  D:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stdint.h \
+  D:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\ycheck.h \
+  D:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\yvals.h \
+  D:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Defaults.h \
+  D:\\Program\ Files\ (x86)\\IAR\ Systems\\Embedded\ Workbench\ 8.3\\arm\\inc\\c\\DLib_Config_Normal.h \
+  D:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Product.h \
+  D:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stdarg.h \
+  F:\EK-TM4C1294_IAR8\Projects\simple_display\..\..\TivaWare_C_Series-2.1.4.178\inc/hw_ints.h \
+  F:\EK-TM4C1294_IAR8\Projects\simple_display\..\..\TivaWare_C_Series-2.1.4.178\inc/hw_memmap.h \
+  F:\EK-TM4C1294_IAR8\Projects\simple_display\..\..\TivaWare_C_Series-2.1.4.178\inc/hw_types.h \
+  F:\EK-TM4C1294_IAR8\Projects\simple_display\..\..\TivaWare_C_Series-2.1.4.178\inc/hw_uart.h \
+  F:\EK-TM4C1294_IAR8\Projects\simple_display\..\..\TivaWare_C_Series-2.1.4.178\driverlib/debug.h \
+  F:\EK-TM4C1294_IAR8\Projects\simple_display\..\..\TivaWare_C_Series-2.1.4.178\driverlib/interrupt.h \
+  F:\EK-TM4C1294_IAR8\Projects\simple_display\..\..\TivaWare_C_Series-2.1.4.178\driverlib/rom.h \
+  F:\EK-TM4C1294_IAR8\Projects\simple_display\..\..\TivaWare_C_Series-2.1.4.178\driverlib/rom_map.h \
+  F:\EK-TM4C1294_IAR8\Projects\simple_display\..\..\TivaWare_C_Series-2.1.4.178\driverlib/sysctl.h \
+  F:\EK-TM4C1294_IAR8\Projects\simple_display\..\..\TivaWare_C_Series-2.1.4.178\driverlib/uart.h \
+  F:\EK-TM4C1294_IAR8\Projects\simple_display\..\..\TivaWare_C_Series-2.1.4.178\utils/uartstdio.h
