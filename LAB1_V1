@@ -1,0 +1,172 @@
+#include <stdbool.h>
+#include <stdint.h>
+#include "inc/tm4c1294ncpdt.h" // CMSIS-Core
+#include "inc/hw_memmap.h"
+#include "driverlib/sysctl.h" // driverlib
+#include "driverlib/gpio.h"
+#include "driverlib/systick.h"
+#include "grlib/grlib.h"
+//#include "system_tm4c1294ncpdt.h" // CMSIS-Core
+#include "cfaf128x128x16.h"
+#include "utils/uartstdio.h"
+#include "driverlib/pin_map.h"
+#include "driverlib/uart.h"
+#include "inc/hw_types.h"
+#include "driverlib/interrupt.h"
+#include "inc/hw_ints.h"
+#include "driverlib/timer.h"
+#include "inc/hw_timer.h"
+
+uint32_t MAXIMO = 0x0000fff0;
+
+
+uint32_t cont2=0;
+
+float contador_alto=0;
+float contador_baixo=0;
+
+
+uint8_t i = 0;
+float Period = 0;
+uint32_t duty_cycle = 0;
+uint32_t prd = 0;
+uint32_t freq = 0;
+
+float larg_pulso = 0;
+
+
+uint32_t vet_larg_pulso[9]; //Lembrar como declara o vetor aqui
+uint32_t vet_periodo[9];
+
+
+// -------------Configura��o da comunica��o UART--------------------
+void ConfigureUART(void) // Fun��o retirada do exemplo hello.c
+{
+   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+   SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
+   GPIOPinConfigure(GPIO_PA0_U0RX);
+   GPIOPinConfigure(GPIO_PA1_U0TX);
+   GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+   UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC);
+   UARTStdioConfig(0, 115200, 16000000);
+}
+//--------------------------------------------------------------------
+
+
+// --------------------Configura��o do pino F-------------------------
+void InicializacaoPortF(void)
+{
+   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
+   while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOF));
+   GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_0 | GPIO_PIN_4); // LEDs D3 e D4 como sa�da
+   GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_0 | GPIO_PIN_4, 0); // LEDs D3 e D4 apagados
+   GPIOPadConfigSet(GPIO_PORTF_BASE, GPIO_PIN_0 | GPIO_PIN_4, GPIO_STRENGTH_12MA, GPIO_PIN_TYPE_STD);  
+}
+//--------------------------------------------------------------------
+
+// --------------------Configura��o do pino M-------------------------
+void InicializacaoPortM(void)
+{
+   
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOM); 
+  while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOM)); 
+  GPIOPinTypeGPIOInput(GPIO_PORTM_BASE, GPIO_PIN_0);  
+   
+}
+//--------------------------------------------------------------------
+
+// --------------------Configura��o do pino N-------------------------
+void InicializacaoPortN(void)
+{
+   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
+   while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPION));
+   GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_0|GPIO_PIN_1); // LEDs D3 e D4 como sa�da
+   GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0 | GPIO_PIN_4, 0); // LEDs D3 e D4 apagados
+   GPIOPadConfigSet(GPIO_PORTN_BASE, GPIO_PIN_0 |GPIO_PIN_1, GPIO_STRENGTH_12MA, GPIO_PIN_TYPE_STD);  
+}
+//--------------------------------------------------------------------
+
+// --------------------Configura��o do pino J-------------------------
+void InicializacaoPortJ(void)
+{
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOJ); // Habilita GPIO J (push-button SW1 = PJ0, push-button SW2 = PJ1)
+  while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOJ)); // Aguarda final da habilita��o
+  GPIOPinTypeGPIOInput(GPIO_PORTJ_BASE, GPIO_PIN_0 | GPIO_PIN_1); // push-buttons SW1 e SW2 como entrada
+  GPIOPadConfigSet(GPIO_PORTJ_BASE, GPIO_PIN_0 | GPIO_PIN_1, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD_WPU); 
+}
+//--------------------------------------------------------------------
+
+
+
+void main(void){
+  uint32_t ui32SysClock = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
+                                              SYSCTL_OSC_MAIN |
+                                              SYSCTL_USE_PLL |                       
+                                                SYSCTL_CFG_VCO_480),
+                                              24000000); // PLL em 24MHz
+   
+  
+  ConfigureUART();
+  InicializacaoPortF();
+  InicializacaoPortJ();
+  InicializacaoPortN();
+  InicializacaoPortM();
+      
+  
+  while(1){
+      
+    while(!(GPIOPinRead(GPIO_PORTM_BASE,GPIO_PIN_0) & GPIO_PIN_0)){}
+       
+       if((GPIOPinRead(GPIO_PORTM_BASE,GPIO_PIN_0) & GPIO_PIN_0)){ 
+         for (i = 0; i < 10; i++){
+          contador_alto=0;
+          contador_baixo=0;
+         
+        //Contagem em nivel alto  
+        while((GPIOPinRead(GPIO_PORTM_BASE,GPIO_PIN_0) & GPIO_PIN_0)){
+          if((GPIOPinRead(GPIO_PORTM_BASE,GPIO_PIN_0) & GPIO_PIN_0))
+            contador_alto++;
+          else
+            contador_alto++;
+        }
+        //Contagem em nivel baixo
+        while(!(GPIOPinRead(GPIO_PORTM_BASE,GPIO_PIN_0) & GPIO_PIN_0)){
+          if((GPIOPinRead(GPIO_PORTM_BASE,GPIO_PIN_0) & GPIO_PIN_0))
+            contador_baixo++;
+          else
+            contador_baixo++;
+        }
+        
+       contador_alto = contador_alto*6;
+       contador_baixo = contador_baixo*6;
+       
+      larg_pulso=contador_alto;
+      Period =(contador_alto + contador_baixo);
+      vet_larg_pulso[i] = larg_pulso;
+      duty_cycle=(larg_pulso/Period)*100;
+      prd = (Period)*0.041;
+      freq = (100/(Period*0.041));
+      
+      
+     }
+      
+      
+    }
+   
+   if(GPIOPinRead(GPIO_PORTJ_BASE, GPIO_PIN_0) == GPIO_PIN_0){ 
+      GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_4, 0); 
+      
+    }
+    else
+    {
+      GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_4, GPIO_PIN_4);          
+      UARTprintf("DUTY_CICLE: %d\n", duty_cycle);
+      UARTprintf("PERIODO: %d\n", prd);
+      UARTprintf("FREQUENCIA: %dkhz\n", freq);
+     
+      
+    }  
+    
+  
+  }// while
+} // main
